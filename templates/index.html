@@ -2,85 +2,72 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>System Prompt</title>
+    <title>OK gomb</title>
     <style>
         body {
-            margin: 0;
-            height: 100vh;
-            background: #0b0f0d;
+            background: #0f0f0f;
+            color: #00ffcc;
+            font-family: monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: "Courier New", monospace;
-            color: #00ff9c;
+            height: 100vh;
         }
 
-        .terminal {
-            border: 2px solid #00ff9c;
-            padding: 40px 50px;
-            width: 420px;
-            background: rgba(0, 0, 0, 0.85);
-            box-shadow: 0 0 25px rgba(0, 255, 156, 0.4);
-        }
-
-        .title {
-            margin-bottom: 25px;
-            font-size: 1.4rem;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            background: #00ff9c;
-            margin-left: 5px;
-            animation: blink 1s steps(1) infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
+        .box {
+            text-align: center;
         }
 
         button {
             margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
             background: transparent;
-            color: #00ff9c;
-            border: 2px solid #00ff9c;
-            padding: 10px 30px;
-            font-size: 1rem;
+            border: 2px solid #00ffcc;
+            color: #00ffcc;
             cursor: pointer;
-            font-family: inherit;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
         }
 
         button:hover {
-            background: #00ff9c;
-            color: #0b0f0d;
-            box-shadow: 0 0 15px #00ff9c;
+            background: #00ffcc;
+            color: #0f0f0f;
         }
 
-        .hint {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            opacity: 0.8;
+        .danger {
+            color: #ff5555;
+            border-color: #ff5555;
         }
     </style>
 </head>
 <body>
 
-    <div class="terminal">
-        <div class="title">
-            &gt; run confirmation.exe<br>
-            Megpróbálhatom?<span class="cursor"></span>
-        </div>
+<div class="box">
+    <h1 id="question">Megpróbálhatom?</h1>
 
-        <form method="post">
-            <button type="submit">[ OK ]</button>
-        </form>
+    <form id="okForm" method="POST">
+        <button type="button" id="okButton">OK</button>
+    </form>
+</div>
 
-        <div class="hint">
-            status: awaiting Norbert to say yes...
-        </div>
-    </div>
+<script>
+    let sure = false;
+
+    const button = document.getElementById("okButton");
+    const question = document.getElementById("question");
+    const form = document.getElementById("okForm");
+
+    button.addEventListener("click", () => {
+        if (!sure) {
+            sure = true;
+            question.innerText = "Are you sure?";
+            button.innerText = "YES. DO IT.";
+            button.classList.add("danger");
+        } else {
+            form.submit();
+        }
+    });
+</script>
 
 </body>
 </html>
