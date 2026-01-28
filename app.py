@@ -6,8 +6,10 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        print("OK gomb megnyomva")
-    return render_template("index.html")
+        if request.form.get("confirmed") == "yes":
+	send_email()
+	print("Email elküldve")
+return render_template("index.html")
 
 # EZ FONTOS: minden itt van egy blokkban
 if __name__ == "__main__":
