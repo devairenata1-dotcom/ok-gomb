@@ -21,15 +21,16 @@ def send_email():
 
 app = Flask(__name__)
 
-# ⬇️ 3. ROUTE
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         if request.form.get("confirmed") == "yes":
             send_email()
             print("Email elküldve")
-    return render_template("index.html")
+            return render_template("index.html", notified=True)
 
+    return render_template("index.html", notified=False)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
