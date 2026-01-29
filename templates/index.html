@@ -41,6 +41,17 @@
     </style>
 </head>
 <body>
+{% if notified %}
+  <p class="notified">✅ Reni értesítve</p>
+{% endif %}
+<style>
+  .notified {
+    margin-top: 20px;
+    color: #00ff99;
+    font-weight: bold;
+    font-family: monospace;
+  }
+</style>
 
 <div class="box">
     <h1 id="question">Megpróbálhatom?</h1>
